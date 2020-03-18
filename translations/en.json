@@ -1,0 +1,9 @@
+{
+  "app": {
+    "description": "Agents from the Finance group will be able to review a batch of customer claims that have been identified by agents and managers for refund processing. If a batch has been approved by the Finance group, it will be sent to the HyperWallet API for processing and payment. Additionally, an approved batch will generate a CSV file that will be downloaded to the agent’s workstation. If a claim in a batch needs correction, Porter agents will have to manually modify the tickets to exclude them from the batch results.",
+    "name": "Finance - Claim Manager",
+    "parameters": {
+
+    }
+  }
+}

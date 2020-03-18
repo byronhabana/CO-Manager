@@ -1,0 +1,19 @@
+{
+  "name": "Custom Object Manager",
+  "author": {
+    "name": "Zendesk Professional Services",
+    "email": "services@zendesk.com",
+    "url": "https://support.zendesk.com"
+  },
+  "defaultLocale": "en",
+  "private": true,
+  "location": {
+    "support": {
+      "nav_bar": "assets/iframe.html"
+    }
+  },
+  "parameters": [
+  ],
+  "version": "1.0",
+  "frameworkVersion": "2.0"
+}
