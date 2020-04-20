@@ -1,31 +1,37 @@
 const template = `
-<div class="container">
+<div class="u-mh-lg">
   <PulseLoader
     class="fill-center u-m-lg"
     color="#1f73b7"
     v-if="isAppLoading">
   </PulseLoader>
   <div v-else>
-    <ObjectTypeSelector
-    :label="'Object Types'"
-    :options="objectTypes" 
-    :selectedOption="selectedObjectType"
-    @select-type="setSelectedObjectType">
-    </ObjectTypeSelector>
+    <div class="d-flex flex-align-center">
+      <ObjectTypeSelector
+        :label="'Object Types'"
+        :options="objectTypes" 
+        :selectedOption="selectedObjectType"
+        @select-type="setSelectedObjectType">
+      </ObjectTypeSelector>
+
+      <section class="u-m" v-if="selectedObjectType">
+        <label class="u-f u-bold">Actions</label>
+        <div class="d-flex u-mt-xs">
+          <button class="c-btn c-btn--primary c-btn--danger"
+            @click="deleteAll">
+            Delete all records
+          </button>
+        </div>
+      </section>
+    </div>
     
-    <div class="u-mv-sm">
+    <div class="u-mv-lg" v-if="!isImport">
       <i>{{records.length}} records found.</i>
     </div>
+    <div v-else>
+      <Import></Import>
+    </div>
 
-    <section class="u-mt" v-if="selectedObjectType">
-      <label class="u-f u-bold">Actions</label>
-      <div class="d-flex u-mt">
-        <button class="c-btn c-btn--sm c-btn--primary c-btn--danger"
-          @click="deleteAll">
-          Delete records
-        </button>
-      </div>
-    </section>
   </div>
 </div>`;
 
@@ -33,19 +39,22 @@ import ZDClient from '../libs/ZDClient.js';
 import ZDAPI from '../libs/ZDAPI.js';
 // import { createJob, getJobStatus } from '../libs/ZDAPI.js';
 import ObjectTypeSelector from './ObjectTypeSelector.js';
+import Import from './Import/Import.js';
 
 const App = {
   template,
   components: {
     ObjectTypeSelector,
-    PulseLoader: VueSpinner.PulseLoader
+    Import,
+    PulseLoader: VueSpinner.PulseLoader,
   },
   data() {
     return {
       objectTypes: [],
       selectedObjectType: null,
       records: [],
-      isAppLoading: true
+      isAppLoading: true,
+      isImport: true
     }
   },
   methods: {
