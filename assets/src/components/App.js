@@ -29,7 +29,7 @@ const template = `
       <i>{{records.length}} records found.</i>
     </div>
     <div v-else>
-      <Import></Import>
+      <Import :type="selectedObjectType"></Import>
     </div>
 
   </div>
@@ -126,6 +126,9 @@ const App = {
         this.isAppLoading = false;
         this.records = records;
       }
+    },
+    setImport(isImport){
+      this.isImport = isImport;
     }
   },
   created() {
