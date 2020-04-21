@@ -16,7 +16,15 @@ const template = `
 
       <section class="u-m" v-if="selectedObjectType">
         <label class="u-f u-bold">Actions</label>
-        <div class="d-flex u-mt-xs">
+        <div class="d-flex u-mt-xs action-buttons">
+          <button class="c-btn c-btn--primary"
+            @click="isImport = true" :disabled="isImport">
+            Bulk Import
+          </button>
+          <button class="c-btn c-btn--primary"
+            @click="isImport = false" :disabled="!isImport">
+            View Records
+          </button>
           <button class="c-btn c-btn--primary c-btn--danger"
             @click="deleteAll">
             Delete all records
@@ -54,7 +62,7 @@ const App = {
       selectedObjectType: null,
       records: [],
       isAppLoading: true,
-      isImport: true
+      isImport: false
     }
   },
   methods: {
