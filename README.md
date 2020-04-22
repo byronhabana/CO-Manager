@@ -13,5 +13,14 @@ This navbar app allows zendesk support admins to easily manage custom object rec
 
 ## Screenshots
 
+![1](screenshots/1.png)
+
+![2](screenshots/2.png)
+
+![3](screenshots/3.png)
+
+![4](screenshots/4.png)
+
+![5](screenshots/5.png)
 
 <div>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
