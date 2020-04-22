@@ -1,7 +1,7 @@
 const template = `
 <section>
   <div class="message">
-    Zendesk is currently importing inventory records from the .csv provided.
+    Zendesk is currently importing records from the .csv provided.
   </div>
   <div class="progressbar">
     <strong>{{completion}}% complete</strong>
