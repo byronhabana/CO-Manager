@@ -11,6 +11,8 @@ This navbar app allows zendesk support admins to easily manage custom object rec
 * Bulk import from a .csv file and export import data report.
 * Bulk delete all of the records of the selected object type.
 
+Note: For Bulk Import. CSV Column Headers should match the attribute key of the object type
+
 ## Screenshots
 
 ![1](screenshots/1.png)
