@@ -1,5 +1,5 @@
 const template = `
-<div class="u-mv-lg">
+<div class="u-mv-lg u-1/3">
   <FileUpload 
     :type="type"
     @set-field-headers="setFileHeaders"
@@ -17,17 +17,27 @@ const template = `
     @set-mode="setMode"
     v-if="mode === 'data-import'">
   </DataImport>
+  <Reporting 
+    v-if="mode === 'import-report'"
+    :headers="fileHeaders"
+    :records="fileRecords"
+    :isAborted="isAborted"
+    @set-is-aborted="setIsAborted"
+    @set-mode="setMode">
+  </Reporting>
 </div>`;
 
 import FileUpload from './FileUpload.js';
 import DataImport from './DataImport.js';
+import Reporting from './Reporting.js';
 
 export default {
   template,
   props: ['type'],
   components: {
     FileUpload,
-    DataImport
+    DataImport,
+    Reporting
   },
   data() {
     return {
@@ -40,7 +50,6 @@ export default {
   methods: {
     setMode(mode){
       this.mode = mode;
-      console.log(this.fileHeaders, this.fileRecords);
     },
     setFileHeaders(headers){
       this.fileHeaders = [...headers];

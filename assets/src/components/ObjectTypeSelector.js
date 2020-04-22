@@ -1,5 +1,5 @@
 const template =`
-<div class="type-selector u-2/8">
+<div class="type-selector u-2/12 u-mr-lg">
   <div class="dropdown">
     <div class="u-fs u-semibold">
       {{label}}

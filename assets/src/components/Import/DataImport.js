@@ -44,7 +44,8 @@ export default {
             var value = null;
             Object.keys(this.objectTypeProperties).forEach(key => {
               if(header === key){
-                if(this.objectTypeProperties[key].type === 'number' || this.objectTypeProperties[key].type === 'integer'){
+                if(this.objectTypeProperties[key].type === 'number' 
+                  || this.objectTypeProperties[key].type === 'integer'){
                   value = parseInt(row[index]);
                 } else if(this.objectTypeProperties[key].type === 'boolean'){
                   value = row[index] === 'true' ? true : false;
@@ -54,9 +55,9 @@ export default {
               }
             });
             record.attributes[header] = value;
-            // if(header === 'serial_number'){
-            //   record.external_id = value
-            // }
+            if(header === 'external_id'){
+              record.external_id = value;
+            }
           } else {
             action = row[index].toLowerCase();
           }
