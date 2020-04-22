@@ -1,51 +1,81 @@
 const template = `
-<div class="container">
+<div class="u-mh-lg">
   <PulseLoader
     class="fill-center u-m-lg"
     color="#1f73b7"
     v-if="isAppLoading">
   </PulseLoader>
   <div v-else>
-    <ObjectTypeSelector
-    :label="'Object Types'"
-    :options="objectTypes" 
-    :selectedOption="selectedObjectType"
-    @select-type="setSelectedObjectType">
-    </ObjectTypeSelector>
+    <div class="d-flex flex-align-center">
+      <ObjectTypeSelector
+        :label="'Object Types'"
+        :options="objectTypes" 
+        :selectedOption="selectedObjectType"
+        @select-type="setSelectedObjectType">
+      </ObjectTypeSelector>
+
+      <section class="u-m" v-if="selectedObjectType">
+        <label class="u-f u-bold">Actions</label>
+        <div class="d-flex u-mt-xs action-buttons u-fg-blue-600">
+          <div class="c-tab__list__item u-mr-sm"
+            @click="isImport = false" :class="{'is-selected': !isImport}">
+            View Records
+          </div>
+          <div class="c-tab__list__item u-fg-blue-600 u-mr-sm"
+            @click="isImport = true" :class="{'is-selected': isImport}">
+            Bulk Import
+          </div>
+          <button class="c-btn c-btn--primary c-btn--danger"
+            @click="showDeleteConfirm = true">
+            Delete all records
+          </button>
+        </div>
+      </section>
+    </div>
     
-    <div class="u-mv-sm">
-      <i>{{records.length}} records found.</i>
+    <div class="u-mv-lg" v-if="!isImport">
+      <Viewer :records="records"></Viewer>
+    </div>
+    <div v-else>
+      <Import :type="selectedObjectType"></Import>
     </div>
 
-    <section class="u-mt" v-if="selectedObjectType">
-      <label class="u-f u-bold">Actions</label>
-      <div class="d-flex u-mt">
-        <button class="c-btn c-btn--sm c-btn--primary c-btn--danger"
-          @click="deleteAll">
-          Delete records
-        </button>
+    <div class="c-callout c-callout--dialog c-callout--warning u-3/12 u-position-absolute" 
+      v-show="showDeleteConfirm">
+      <button class="c-callout__close" @click="showDeleteConfirm = false"></button>
+      <strong class="c-callout__title"><span dir="ltr">This will delete all records.</span></strong>
+      <p class="c-callout__paragraph">Are you sure you want to delete all records?</p>
+      <div class="action-buttons d-flex flex-end u-mt-lg">
+        <button class="c-btn u-ml-xs" @click="showDeleteConfirm = false">Cancel</button>
+        <button class="c-btn c-btn--primary c-btn--danger u-ml-xs" @click="deleteAll">Delete All</button>
       </div>
-    </section>
+    </div>
+
   </div>
 </div>`;
 
 import ZDClient from '../libs/ZDClient.js';
 import ZDAPI from '../libs/ZDAPI.js';
-// import { createJob, getJobStatus } from '../libs/ZDAPI.js';
 import ObjectTypeSelector from './ObjectTypeSelector.js';
+import Import from './Import/Import.js';
+import Viewer from './Viewer.js';
 
 const App = {
   template,
   components: {
     ObjectTypeSelector,
-    PulseLoader: VueSpinner.PulseLoader
+    Import,
+    PulseLoader: VueSpinner.PulseLoader,
+    Viewer
   },
   data() {
     return {
       objectTypes: [],
       selectedObjectType: null,
       records: [],
-      isAppLoading: true
+      isAppLoading: true,
+      isImport: false,
+      showDeleteConfirm: false
     }
   },
   methods: {
@@ -62,7 +92,12 @@ const App = {
     },
     deleteAll() {
       this.isAppLoading = true;
-      this.createDeleteJob();
+      if(this.records.length){
+        this.createDeleteJob();
+      } else {
+        this.isAppLoading = false;
+        this.showDeleteConfirm = false;
+      }
     },
     async createDeleteJob(batchIndex, batches) {
       let currentBatchIndex = batchIndex || 0;
@@ -93,12 +128,14 @@ const App = {
               this.createDeleteJob(currentBatchIndex + 1, batchOfBatches);
             } else {
               this.isAppLoading = false;
+              this.showDeleteConfirm = false;
               this.loadRecordsByType();
             }
           }
         },1000);
       } else {
         this.isAppLoading = false;
+        this.showDeleteConfirm = false;
       }
     },
     async loadRecordsByType(page, prevRecords) {
@@ -117,6 +154,9 @@ const App = {
         this.isAppLoading = false;
         this.records = records;
       }
+    },
+    setImport(isImport){
+      this.isImport = isImport;
     }
   },
   created() {

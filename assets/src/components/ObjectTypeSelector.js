@@ -1,11 +1,11 @@
 const template =`
-<div class="type-selector u-2/8">
+<div class="type-selector u-2/12 u-mr-lg">
   <div class="dropdown">
-    <div class="u-pv-sm u-fs u-semibold">
+    <div class="u-fs u-semibold">
       {{label}}
     </div>
     <button
-      class="c-txt__input c-txt__input--select"
+      class="c-txt__input c-txt__input--select u-mt-xs"
       id="type-select"
       @click="isMenuHidden = !isMenuHidden">
       {{selectedOption ? selectedOption.key : '-'}}
@@ -42,7 +42,7 @@ export default {
   },
   created() {
     const self = this;
-    window.addEventListener('click', function(e){
+    window.addEventListener('click', e => {
       if (!self.$el.children[0].contains(e.target)){
         self.isMenuHidden = true;
       }
