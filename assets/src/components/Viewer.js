@@ -8,11 +8,15 @@ const template = `
   <table class="c-table">
     <thead>
       <tr class="c-table__row c-table__row--header">
+        <th class="c-table__row__cell"></th>
         <th class="c-table__row__cell"
           v-for="field in attributes">{{field}}</th>
       </tr>
     </thead>
     <tr class="c-table__row" v-for="record in filteredRecords">
+      <td class="c-table__row__cell">
+        <span class="anchor u-fg-red-600" @click="deleteRecord(record)">Delete</span>
+      </td>
       <td class="c-table__row__cell" v-for="field in attributes">
         {{record.attributes[field]}}
       </td>
@@ -21,12 +25,23 @@ const template = `
 </section>
 `;
 
+import ZDAPI from '../libs/ZDAPI.js';
+
 export default {
   template,
   props: ['records'],
   data(){
     return {
       filterBy: ''
+    }
+  },
+  methods: {
+    async deleteRecord(record) {
+      try {
+        await ZDAPI.deleteRecord(record.id);
+      } catch(error){
+        console.log(error);
+      }
     }
   },
   computed: {

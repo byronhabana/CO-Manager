@@ -45,9 +45,16 @@ const ZDAPI = {
     return ZDClient.request(requestPayload)
   },
   getJobStatus(id) {
-    var payload = {
+    const payload = {
       url: '/api/sunshine/jobs/'+id,
       type: 'GET'
+    }
+    return ZDClient.request(payload)
+  },
+  deleteRecord(id){
+    const payload = {
+      url: '/api/sunshine/objects/records/'+id,
+      type: 'DELETE'
     }
     return ZDClient.request(payload)
   }

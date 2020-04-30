@@ -6,6 +6,9 @@
   display: flex;
   align-items: center;
 }
+.anchor {
+  cursor: pointer;
+}
 // Flex props
 .flex-center {
   justify-content: center;

@@ -91,6 +91,7 @@ export default {
       this.bulkImportInterval = setInterval( () => {
         console.log('Checking job status...');
         ZDAPI.getJobStatus(job.data.id).then(jobStatus => {
+          console.log(jobStatus);
           if (jobStatus.data.job_status === 'completed' || jobStatus.data.job_status === 'failed') {
             clearInterval(this.bulkImportInterval);
             this.totalProcessed = this.totalProcessed + jobStatus.data.results.length;

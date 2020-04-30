@@ -12,6 +12,10 @@
           align-items: center;
 }
 
+.anchor {
+  cursor: pointer;
+}
+
 .flex-center {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
