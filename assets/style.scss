@@ -20,6 +20,9 @@
 .flex-end {
   justify-content: flex-end;
 }
+.flex-space-between {
+  justify-content: space-between;
+}
 // Callouts
 .c-callout {
   top: 20%;
@@ -28,6 +31,29 @@
 /** Viewer **/
 .c-table__row__cell {
   overflow-wrap: break-word;
+}
+.select-all {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.c-chk {
+  display: flex;
+  height: 38px;
+  align-items: center;
+}
+.c-table__row__cell__sortable:before {
+  display: none;
+}
+.c-table__row__cell__sortable:before:hover {
+  display: none;
+}
+.c-table__row__cell__sortable {
+  padding: 12px;
+}
+.c-table__row__cell.c-table__row__cell__sortable.is-ascending:after,
+.c-table__row__cell.c-table__row__cell__sortable.is-descending::after {
+  opacity: 1;
 }
 /** Import **/
 

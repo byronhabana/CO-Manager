@@ -2,6 +2,7 @@
 
 let CLIENT;
 let APP_SETTINGS = null;
+var APP_NAME = null;
 
 const ZDClient = {
 
@@ -9,6 +10,7 @@ const ZDClient = {
     ON_APP_REGISTERED(cb) {
       return CLIENT.on('app.registered', (data) => {
         APP_SETTINGS = data.metadata.settings;
+        APP_NAME = data.metadata.name;
         return cb(data);
       });
     },
@@ -47,6 +49,15 @@ const ZDClient = {
    */
   resizeFrame(appHeight) {
     CLIENT.invoke('resize', {width: '100%', height: `${appHeight}px`});
+  },
+
+  /**
+   * Invokes ZAF notify to display notification message to agent
+   * @param {String} type 
+   * @param {String} message 
+   */
+  notify: function(type, message, options = {}) {
+    CLIENT.invoke('notify', '<b>'+APP_NAME+':</b> ' + message, type, options);
   },
 };
 

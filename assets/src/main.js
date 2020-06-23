@@ -1,5 +1,4 @@
 import App from './components/App.js';
-// import store from './store/store.js';
 import ZDClient from './libs/ZDClient.js';
 import i18n from './i18n/index.js';
 
@@ -13,7 +12,6 @@ const Main = {
     Vue.use(i18n);
     new Vue({
       el: '#app',
-      // store,
       render: h => h(App),
     });
   },

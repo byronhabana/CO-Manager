@@ -37,6 +37,12 @@
           justify-content: flex-end;
 }
 
+.flex-space-between {
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
 .c-callout {
   top: 20%;
   left: 40%;
@@ -45,6 +51,45 @@
 /** Viewer **/
 .c-table__row__cell {
   overflow-wrap: break-word;
+}
+
+.select-all {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.c-chk {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 38px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.c-table__row__cell__sortable:before {
+  display: none;
+}
+
+.c-table__row__cell__sortable:before:hover {
+  display: none;
+}
+
+.c-table__row__cell__sortable {
+  padding: 12px;
+}
+
+.c-table__row__cell.c-table__row__cell__sortable.is-ascending:after,
+.c-table__row__cell.c-table__row__cell__sortable.is-descending::after {
+  opacity: 1;
 }
 
 /** Import **/
