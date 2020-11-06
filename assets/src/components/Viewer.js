@@ -78,7 +78,7 @@ const template = `
         {{removeTimeStamp(record.updated_at)}}
       </td>
       <td class="c-table__row__cell" v-for="field in attributes">
-        {{record.attributes[field]}}
+        {{record.attributes ? record.attributes[field] : record[field]}}
       </td>
     </tr>
   </table>
@@ -105,7 +105,7 @@ import { mutations, getters, actions } from '../store/store.js';
 
 export default {
   template,
-  props: ['records'],
+  props: ['records', 'type'],
   data(){
     return {
       filterBy: '',
@@ -179,7 +179,7 @@ export default {
         console.log(batchOfBatches);
       }
       if(batchOfBatches.length > 0){
-        const createJob = await ZDAPI.createJob(batchOfBatches[currentBatchIndex], 'delete'); 
+        const createJob = await ZDAPI.createJob(batchOfBatches[currentBatchIndex], this.type, 'delete'); 
         console.log(createJob);
         let jobCheckInterval = setInterval( async () => {
           console.log('Checking job status...');
@@ -192,7 +192,11 @@ export default {
             } else {
               this.setIsAppLoading(false);
               this.showDeleteConfirm = false;
-              this.loadRecordsByType();
+              if(this.type === 'resources') {
+                this.loadObjectRecordsByType();
+              } else {
+                this.loadRelationshipRecordsByType();
+              }
             }
           }
         },1000);
@@ -260,8 +264,16 @@ export default {
   },
   computed: {
     ...getters,
-    attributes(){
-      return this.records.length > 0 ? Object.keys(this.records[0].attributes) : []
+    attributes() {
+      console.log('fields');
+      if(!this.records.length) {
+        return [];
+      } 
+      if(Object.keys(this.records[0]).indexOf('attributes') > -1) {
+        return Object.keys(this.records[0].attributes);
+      } else {
+        return Object.keys(this.records[0]);
+      }
     },
     filteredRecords(){
       if(this.filterBy && this.filterBy.length > 2){

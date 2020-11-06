@@ -26,9 +26,9 @@ const ZDAPI = {
     }
     return ZDClient.request(payload)
   },
-  createJob(records, action) {
+  createJob(records, type, action) {
     const requestData = {
-      type: "resources",
+      type: type,
       action: action,
       data: records
     }
