@@ -37,6 +37,12 @@
           justify-content: flex-end;
 }
 
+.flex-space-between {
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
 .c-callout {
   top: 20%;
   left: 40%;
@@ -45,6 +51,45 @@
 /** Viewer **/
 .c-table__row__cell {
   overflow-wrap: break-word;
+}
+
+.select-all {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.c-chk {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 38px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.c-table__row__cell__sortable:before {
+  display: none;
+}
+
+.c-table__row__cell__sortable:before:hover {
+  display: none;
+}
+
+.c-table__row__cell__sortable {
+  padding: 12px;
+}
+
+.c-table__row__cell.c-table__row__cell__sortable.is-ascending:after,
+.c-table__row__cell.c-table__row__cell__sortable.is-descending::after {
+  opacity: 1;
 }
 
 /** Import **/
@@ -81,15 +126,15 @@
   margin-top: -20px;
   margin-left: -4px;
   border-radius: 4px;
-  border-bottom: 4px solid #117A60;
-  -webkit-transition: all .2s ease;
-  transition: all .2s ease;
+  border-bottom: 4px solid #117a60;
+  -webkit-transition: all 0.2s ease;
+  transition: all 0.2s ease;
   outline: none;
 }
 
 .file_input button:hover {
   background: #149174;
-  color: #0C5645;
+  color: #0c5645;
 }
 
 .file_input button button:active {
@@ -144,8 +189,8 @@
   box-shadow: inset 0 2px 9px rgba(255, 255, 255, 0.3), inset 0 -2px 6px rgba(0, 0, 0, 0.4);
   position: relative;
   overflow: hidden;
-  -webkit-transition: ease-in-out .5s;
-  transition: ease-in-out .5s;
+  -webkit-transition: ease-in-out 0.5s;
+  transition: ease-in-out 0.5s;
 }
 
 .meter span :after {
@@ -222,5 +267,9 @@
   100% {
     background-position: 50px 50px;
   }
+}
+
+.c-menu {
+  z-index: 9999 !important;
 }
 /*# sourceMappingURL=style.css.map */
