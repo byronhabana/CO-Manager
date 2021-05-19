@@ -11,6 +11,7 @@ tmp/
 *.zip
 .zat
 .config.json
+.settings.json
 tmp
 
 
